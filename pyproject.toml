@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "relaxed-spec-dec-repro"
+version = "0.1.0"
+description = "Paper reproduction code for training-free relaxed speculative decoding."
+requires-python = ">=3.12"
+dependencies = [
+  "datasets>=4.8.4",
+  "orjson>=3.10",
+  "pyyaml>=6.0",
+  "tenacity>=8.2",
+  "torch==2.11.0",
+  "transformers==5.6.2",
+  "vllm==0.20.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ens_spec_dec = ["tasks/data/*.jsonl"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"

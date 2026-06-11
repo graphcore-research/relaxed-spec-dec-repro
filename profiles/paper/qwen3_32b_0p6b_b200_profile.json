@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "component_profile",
+  "profile_subject": "drafter_model",
+  "profile_id": "qwen3_32b_0p6b_b200_20260518-214602",
+  "created_at_utc": "2026-05-18T22:48:15.357773Z",
+  "compatibility": {
+    "backend_name": "vllm",
+    "target_model": "Qwen/Qwen3-32B",
+    "draft_model": "Qwen/Qwen3-0.6B",
+    "dtype": "bfloat16",
+    "batch_size": 1,
+    "tensor_parallel_size": null,
+    "draft_lengths": [
+      3,
+      5,
+      10,
+      20
+    ],
+    "max_model_len": 4096,
+    "profile_mode": "cuda_events_dummy_synthetic_components_only"
+  },
+  "hardware": {
+    "cuda_available": true,
+    "device_count": 1,
+    "device_name": "NVIDIA GB200"
+  },
+  "software": {
+    "torch": "2.11.0+cu130",
+    "vllm": "0.20.1"
+  },
+  "costs_ms": {
+    "target_verify_block_by_d": {
+      "3": 30.5031298828125,
+      "5": 30.4477587890625,
+      "10": 30.9052294921875,
+      "20": 32.26999755859375
+    },
+    "stock_sd_round_by_d": {},
+    "target_ar_token": 12.44760986328125,
+    "drafter_ar_token": 3.9289920043945314
+  },
+  "relative_costs": {
+    "drafter_ar_token_over_target_ar": 0.3156422837435258,
+    "target_verify_block_over_target_ar_by_d": {
+      "3": 2.4505210412155165,
+      "5": 2.446072709820319,
+      "10": 2.482824400156829,
+      "20": 2.592465373917754
+    }
+  },
+  "derived_cost_modes": {
+    "optimistic_ar_drafter": {
+      "round_cost_ms_by_d": {
+        "3": 24.234585876464845,
+        "5": 32.09256988525391,
+        "10": 51.737529907226566,
+        "20": 91.02744995117189
+      },
+      "source": "target_ar_token + d * drafter_ar_token",
+      "assumption": "target verifier latency is memory-bound, so checking a parallel token block has the same latency as one verifier token"
+    }
+  },
+  "measurement": {
+    "rows": {
+      "target_ar_token": {
+        "available": true,
+        "num_tokens": 1,
+        "ms_per_iter": 12.44760986328125,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 2489.52197265625,
+            "ms_per_iter": 12.44760986328125,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d3": {
+        "available": true,
+        "num_tokens": 4,
+        "ms_per_iter": 30.5031298828125,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6100.6259765625,
+            "ms_per_iter": 30.5031298828125,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d5": {
+        "available": true,
+        "num_tokens": 6,
+        "ms_per_iter": 30.4477587890625,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6089.5517578125,
+            "ms_per_iter": 30.4477587890625,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d10": {
+        "available": true,
+        "num_tokens": 11,
+        "ms_per_iter": 30.9052294921875,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6181.0458984375,
+            "ms_per_iter": 30.9052294921875,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d20": {
+        "available": true,
+        "num_tokens": 21,
+        "ms_per_iter": 32.26999755859375,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6453.99951171875,
+            "ms_per_iter": 32.26999755859375,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "drafter_ar_token": {
+        "available": true,
+        "num_tokens": 1,
+        "ms_per_iter": 3.9289920043945314,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 785.7984008789062,
+            "ms_per_iter": 3.9289920043945314,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      }
+    },
+    "stock_sd_rounds": {
+      "skipped": true,
+      "reason": "--synthetic-components-only"
+    }
+  },
+  "warnings": []
+}

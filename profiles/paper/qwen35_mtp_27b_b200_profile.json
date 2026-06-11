@@ -1,0 +1,1203 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "component_profile",
+  "profile_subject": "native_mtp",
+  "profile_id": "qwen3_5_27b_mtp_b200_20260518-214602",
+  "created_at_utc": "2026-05-18T23:17:59.593442Z",
+  "compatibility": {
+    "backend_name": "vllm",
+    "target_model": "Qwen/Qwen3.5-27B",
+    "draft_model": null,
+    "dtype": "bfloat16",
+    "batch_size": 1,
+    "tensor_parallel_size": null,
+    "draft_lengths": [
+      3,
+      5,
+      10,
+      20
+    ],
+    "max_model_len": 4096,
+    "profile_mode": "cuda_events_dummy_plus_stock_mtp_generate"
+  },
+  "hardware": {
+    "cuda_available": true,
+    "device_count": 1,
+    "device_name": "NVIDIA GB200"
+  },
+  "software": {
+    "torch": "2.11.0+cu130",
+    "vllm": "0.20.1"
+  },
+  "costs_ms": {
+    "target_verify_block_by_d": {
+      "3": 34.46384765625,
+      "5": 34.5381982421875,
+      "10": 34.58156982421875,
+      "20": 33.70188232421875
+    },
+    "stock_mtp_round_by_d": {
+      "3": 18.25126759166244,
+      "5": 21.54573020629623,
+      "10": 23.62141775681622,
+      "20": 31.946769550633473
+    },
+    "target_ar_token": 10.053833618164063,
+    "effective_mtp_token_by_d": {
+      "3": 2.732477991166126,
+      "5": 2.2983793176264333,
+      "10": 1.3567584138652158,
+      "20": 1.0946467966234705
+    },
+    "effective_mtp_token_after_verify_by_d": {
+      "3": 0.0,
+      "5": 0.0,
+      "10": 0.0,
+      "20": 0.0
+    }
+  },
+  "relative_costs": {
+    "target_verify_block_over_target_ar_by_d": {
+      "3": 3.427930972916127,
+      "5": 3.435326220217929,
+      "10": 3.4396401549495415,
+      "20": 3.35214243682432
+    },
+    "stock_mtp_round_over_target_ar_by_d": {
+      "3": 1.8153540514822362,
+      "5": 2.1430362809436176,
+      "10": 2.349493601539205,
+      "20": 3.177570940990696
+    },
+    "effective_mtp_token_over_target_ar_by_d": {
+      "3": 0.27178468382741205,
+      "5": 0.22860725618872355,
+      "10": 0.1349493601539205,
+      "20": 0.10887854704953479
+    },
+    "effective_mtp_token_after_verify_over_target_ar_by_d": {
+      "3": 0.0,
+      "5": 0.0,
+      "10": 0.0,
+      "20": 0.0
+    }
+  },
+  "derived_cost_modes": {
+    "stock_native_mtp_round": {
+      "round_cost_ms_by_d": {
+        "3": 18.25126759166244,
+        "5": 21.54573020629623,
+        "10": 23.62141775681622,
+        "20": 31.946769550633473
+      },
+      "source": "measured native MTP wall time divided by measured drafts"
+    },
+    "effective_linear_native_mtp": {
+      "round_cost_ms_by_d": {
+        "3": 18.25126759166244,
+        "5": 21.54573020629623,
+        "10": 23.62141775681622,
+        "20": 31.946769550633473
+      },
+      "source": "target_ar_token + d * effective_mtp_token_by_d",
+      "note": "The effective token cost is derived from stock MTP rounds; it includes implementation overhead and is d-specific."
+    }
+  },
+  "measurement": {
+    "rows": {
+      "target_ar_token": {
+        "available": true,
+        "num_tokens": 1,
+        "ms_per_iter": 10.053833618164063,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 2010.7667236328125,
+            "ms_per_iter": 10.053833618164063,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d3": {
+        "available": true,
+        "num_tokens": 4,
+        "ms_per_iter": 34.46384765625,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6892.76953125,
+            "ms_per_iter": 34.46384765625,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d5": {
+        "available": true,
+        "num_tokens": 6,
+        "ms_per_iter": 34.5381982421875,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6907.6396484375,
+            "ms_per_iter": 34.5381982421875,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d10": {
+        "available": true,
+        "num_tokens": 11,
+        "ms_per_iter": 34.58156982421875,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6916.31396484375,
+            "ms_per_iter": 34.58156982421875,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "target_verify_block_d20": {
+        "available": true,
+        "num_tokens": 21,
+        "ms_per_iter": 33.70188232421875,
+        "worker_results": [
+          {
+            "available": true,
+            "total_ms": 6740.37646484375,
+            "ms_per_iter": 33.70188232421875,
+            "warmup_iters": 20,
+            "repeat_iters": 200,
+            "runner_class": "GPUModelRunner",
+            "device": "0"
+          }
+        ],
+        "aggregation": "max_worker_ms_per_iter"
+      },
+      "stock_mtp_round_d3": {
+        "available": true,
+        "wall_time_s": 22.3030489970115,
+        "output_tokens": 4096,
+        "prompt_source": "real_aime_mmlu",
+        "prompt_count": 16,
+        "prompt_batch_size": 1,
+        "task_prompt_counts": {
+          "aime_2024": 8,
+          "mmlu_redux": 8
+        },
+        "prompt_summaries": [
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-1",
+            "raw_prompt_chars": 849,
+            "formatted_prompt_chars": 907,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-2",
+            "raw_prompt_chars": 463,
+            "formatted_prompt_chars": 521,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-3",
+            "raw_prompt_chars": 754,
+            "formatted_prompt_chars": 812,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-4",
+            "raw_prompt_chars": 792,
+            "formatted_prompt_chars": 850,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-5",
+            "raw_prompt_chars": 510,
+            "formatted_prompt_chars": 568,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-6",
+            "raw_prompt_chars": 565,
+            "formatted_prompt_chars": 623,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-7",
+            "raw_prompt_chars": 443,
+            "formatted_prompt_chars": 501,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-8",
+            "raw_prompt_chars": 669,
+            "formatted_prompt_chars": 727,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0000",
+            "raw_prompt_chars": 475,
+            "formatted_prompt_chars": 533,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0001",
+            "raw_prompt_chars": 375,
+            "formatted_prompt_chars": 433,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0002",
+            "raw_prompt_chars": 371,
+            "formatted_prompt_chars": 429,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0003",
+            "raw_prompt_chars": 471,
+            "formatted_prompt_chars": 529,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0004",
+            "raw_prompt_chars": 462,
+            "formatted_prompt_chars": 520,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0005",
+            "raw_prompt_chars": 406,
+            "formatted_prompt_chars": 464,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0006",
+            "raw_prompt_chars": 428,
+            "formatted_prompt_chars": 486,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0007",
+            "raw_prompt_chars": 478,
+            "formatted_prompt_chars": 536,
+            "output_tokens": 256
+          }
+        ],
+        "drafts": 1222,
+        "ms_per_round": 18.25126759166244,
+        "measured_window": {
+          "metric_deltas": {
+            "delta_num_drafts": 1222,
+            "delta_num_draft_tokens": 3666,
+            "delta_num_accepted_tokens": 2881,
+            "delta_num_accepted_tokens_per_pos": [
+              1089,
+              964,
+              828
+            ]
+          },
+          "start_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 22
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 66
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 44
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                17,
+                15,
+                12
+              ]
+            }
+          ],
+          "end_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 1244
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 3732
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 2925
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                1106,
+                979,
+                840
+              ]
+            }
+          ],
+          "coverage": {
+            "start_metrics_present": true,
+            "end_metrics_present": true,
+            "spec_decode_metrics_present": true,
+            "measured_vllm_deltas_present": true
+          },
+          "source_note": "Deltas are after warmup and before/after measured generation. vLLM accepted-token counters exclude bonus/resampled output tokens."
+        }
+      },
+      "stock_mtp_round_d5": {
+        "available": true,
+        "wall_time_s": 19.95134617103031,
+        "output_tokens": 4096,
+        "prompt_source": "real_aime_mmlu",
+        "prompt_count": 16,
+        "prompt_batch_size": 1,
+        "task_prompt_counts": {
+          "aime_2024": 8,
+          "mmlu_redux": 8
+        },
+        "prompt_summaries": [
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-1",
+            "raw_prompt_chars": 849,
+            "formatted_prompt_chars": 907,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-2",
+            "raw_prompt_chars": 463,
+            "formatted_prompt_chars": 521,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-3",
+            "raw_prompt_chars": 754,
+            "formatted_prompt_chars": 812,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-4",
+            "raw_prompt_chars": 792,
+            "formatted_prompt_chars": 850,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-5",
+            "raw_prompt_chars": 510,
+            "formatted_prompt_chars": 568,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-6",
+            "raw_prompt_chars": 565,
+            "formatted_prompt_chars": 623,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-7",
+            "raw_prompt_chars": 443,
+            "formatted_prompt_chars": 501,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-8",
+            "raw_prompt_chars": 669,
+            "formatted_prompt_chars": 727,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0000",
+            "raw_prompt_chars": 475,
+            "formatted_prompt_chars": 533,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0001",
+            "raw_prompt_chars": 375,
+            "formatted_prompt_chars": 433,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0002",
+            "raw_prompt_chars": 371,
+            "formatted_prompt_chars": 429,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0003",
+            "raw_prompt_chars": 471,
+            "formatted_prompt_chars": 529,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0004",
+            "raw_prompt_chars": 462,
+            "formatted_prompt_chars": 520,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0005",
+            "raw_prompt_chars": 406,
+            "formatted_prompt_chars": 464,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0006",
+            "raw_prompt_chars": 428,
+            "formatted_prompt_chars": 486,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0007",
+            "raw_prompt_chars": 478,
+            "formatted_prompt_chars": 536,
+            "output_tokens": 256
+          }
+        ],
+        "drafts": 926,
+        "ms_per_round": 21.54573020629623,
+        "measured_window": {
+          "metric_deltas": {
+            "delta_num_drafts": 926,
+            "delta_num_draft_tokens": 4630,
+            "delta_num_accepted_tokens": 3190,
+            "delta_num_accepted_tokens_per_pos": [
+              823,
+              731,
+              644,
+              542,
+              450
+            ]
+          },
+          "start_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 16
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 80
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 48
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                15,
+                10,
+                9,
+                7,
+                7
+              ]
+            }
+          ],
+          "end_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 942
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 4710
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 3238
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                838,
+                741,
+                653,
+                549,
+                457
+              ]
+            }
+          ],
+          "coverage": {
+            "start_metrics_present": true,
+            "end_metrics_present": true,
+            "spec_decode_metrics_present": true,
+            "measured_vllm_deltas_present": true
+          },
+          "source_note": "Deltas are after warmup and before/after measured generation. vLLM accepted-token counters exclude bonus/resampled output tokens."
+        }
+      },
+      "stock_mtp_round_d10": {
+        "available": true,
+        "wall_time_s": 17.38536346901674,
+        "output_tokens": 4096,
+        "prompt_source": "real_aime_mmlu",
+        "prompt_count": 16,
+        "prompt_batch_size": 1,
+        "task_prompt_counts": {
+          "aime_2024": 8,
+          "mmlu_redux": 8
+        },
+        "prompt_summaries": [
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-1",
+            "raw_prompt_chars": 849,
+            "formatted_prompt_chars": 907,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-2",
+            "raw_prompt_chars": 463,
+            "formatted_prompt_chars": 521,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-3",
+            "raw_prompt_chars": 754,
+            "formatted_prompt_chars": 812,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-4",
+            "raw_prompt_chars": 792,
+            "formatted_prompt_chars": 850,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-5",
+            "raw_prompt_chars": 510,
+            "formatted_prompt_chars": 568,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-6",
+            "raw_prompt_chars": 565,
+            "formatted_prompt_chars": 623,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-7",
+            "raw_prompt_chars": 443,
+            "formatted_prompt_chars": 501,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-8",
+            "raw_prompt_chars": 669,
+            "formatted_prompt_chars": 727,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0000",
+            "raw_prompt_chars": 475,
+            "formatted_prompt_chars": 533,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0001",
+            "raw_prompt_chars": 375,
+            "formatted_prompt_chars": 433,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0002",
+            "raw_prompt_chars": 371,
+            "formatted_prompt_chars": 429,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0003",
+            "raw_prompt_chars": 471,
+            "formatted_prompt_chars": 529,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0004",
+            "raw_prompt_chars": 462,
+            "formatted_prompt_chars": 520,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0005",
+            "raw_prompt_chars": 406,
+            "formatted_prompt_chars": 464,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0006",
+            "raw_prompt_chars": 428,
+            "formatted_prompt_chars": 486,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0007",
+            "raw_prompt_chars": 478,
+            "formatted_prompt_chars": 536,
+            "output_tokens": 256
+          }
+        ],
+        "drafts": 736,
+        "ms_per_round": 23.62141775681622,
+        "measured_window": {
+          "metric_deltas": {
+            "delta_num_drafts": 736,
+            "delta_num_draft_tokens": 7360,
+            "delta_num_accepted_tokens": 3389,
+            "delta_num_accepted_tokens_per_pos": [
+              642,
+              562,
+              481,
+              404,
+              339,
+              284,
+              232,
+              186,
+              151,
+              108
+            ]
+          },
+          "start_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 14
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 140
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 50
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                12,
+                11,
+                9,
+                6,
+                5,
+                3,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          ],
+          "end_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 750
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 7500
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 3439
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                654,
+                573,
+                490,
+                410,
+                344,
+                287,
+                233,
+                187,
+                152,
+                109
+              ]
+            }
+          ],
+          "coverage": {
+            "start_metrics_present": true,
+            "end_metrics_present": true,
+            "spec_decode_metrics_present": true,
+            "measured_vllm_deltas_present": true
+          },
+          "source_note": "Deltas are after warmup and before/after measured generation. vLLM accepted-token counters exclude bonus/resampled output tokens."
+        }
+      },
+      "stock_mtp_round_d20": {
+        "available": true,
+        "wall_time_s": 21.755750063981395,
+        "output_tokens": 4096,
+        "prompt_source": "real_aime_mmlu",
+        "prompt_count": 16,
+        "prompt_batch_size": 1,
+        "task_prompt_counts": {
+          "aime_2024": 8,
+          "mmlu_redux": 8
+        },
+        "prompt_summaries": [
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-1",
+            "raw_prompt_chars": 849,
+            "formatted_prompt_chars": 907,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-2",
+            "raw_prompt_chars": 463,
+            "formatted_prompt_chars": 521,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-3",
+            "raw_prompt_chars": 754,
+            "formatted_prompt_chars": 812,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-4",
+            "raw_prompt_chars": 792,
+            "formatted_prompt_chars": 850,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-5",
+            "raw_prompt_chars": 510,
+            "formatted_prompt_chars": 568,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-6",
+            "raw_prompt_chars": 565,
+            "formatted_prompt_chars": 623,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-7",
+            "raw_prompt_chars": 443,
+            "formatted_prompt_chars": 501,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "aime_2024",
+            "sample_id": "2024-I-8",
+            "raw_prompt_chars": 669,
+            "formatted_prompt_chars": 727,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0000",
+            "raw_prompt_chars": 475,
+            "formatted_prompt_chars": 533,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0001",
+            "raw_prompt_chars": 375,
+            "formatted_prompt_chars": 433,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0002",
+            "raw_prompt_chars": 371,
+            "formatted_prompt_chars": 429,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0003",
+            "raw_prompt_chars": 471,
+            "formatted_prompt_chars": 529,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0004",
+            "raw_prompt_chars": 462,
+            "formatted_prompt_chars": 520,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0005",
+            "raw_prompt_chars": 406,
+            "formatted_prompt_chars": 464,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0006",
+            "raw_prompt_chars": 428,
+            "formatted_prompt_chars": 486,
+            "output_tokens": 256
+          },
+          {
+            "task_name": "mmlu_redux",
+            "sample_id": "mmlu-redux-abstract_algebra-0007",
+            "raw_prompt_chars": 478,
+            "formatted_prompt_chars": 536,
+            "output_tokens": 256
+          }
+        ],
+        "drafts": 681,
+        "ms_per_round": 31.946769550633473,
+        "measured_window": {
+          "metric_deltas": {
+            "delta_num_drafts": 681,
+            "delta_num_draft_tokens": 13620,
+            "delta_num_accepted_tokens": 3493,
+            "delta_num_accepted_tokens_per_pos": [
+              587,
+              511,
+              425,
+              358,
+              291,
+              247,
+              210,
+              175,
+              144,
+              114,
+              91,
+              76,
+              65,
+              52,
+              42,
+              34,
+              27,
+              20,
+              15,
+              9
+            ]
+          },
+          "start_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 14
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 280
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 50
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                12,
+                11,
+                9,
+                6,
+                5,
+                3,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "end_metrics": [
+            {
+              "name": "vllm:spec_decode_num_drafts",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 695
+            },
+            {
+              "name": "vllm:spec_decode_num_draft_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 13900
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens",
+              "kind": "counter",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "value": 3543
+            },
+            {
+              "name": "vllm:spec_decode_num_accepted_tokens_per_pos",
+              "kind": "vector",
+              "labels": {
+                "model_name": "Qwen/Qwen3.5-27B",
+                "engine": "0"
+              },
+              "values": [
+                599,
+                522,
+                434,
+                364,
+                296,
+                250,
+                211,
+                176,
+                145,
+                115,
+                91,
+                76,
+                65,
+                52,
+                42,
+                34,
+                27,
+                20,
+                15,
+                9
+              ]
+            }
+          ],
+          "coverage": {
+            "start_metrics_present": true,
+            "end_metrics_present": true,
+            "spec_decode_metrics_present": true,
+            "measured_vllm_deltas_present": true
+          },
+          "source_note": "Deltas are after warmup and before/after measured generation. vLLM accepted-token counters exclude bonus/resampled output tokens."
+        }
+      }
+    }
+  },
+  "warnings": [
+    "d=3: stock MTP round cost is below verifier-block cost; clamped after-verify MTP token cost to 0",
+    "d=5: stock MTP round cost is below verifier-block cost; clamped after-verify MTP token cost to 0",
+    "d=10: stock MTP round cost is below verifier-block cost; clamped after-verify MTP token cost to 0",
+    "d=20: stock MTP round cost is below verifier-block cost; clamped after-verify MTP token cost to 0"
+  ]
+}
