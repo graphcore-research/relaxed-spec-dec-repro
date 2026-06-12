@@ -1,5 +1,7 @@
 # Relaxed Spec-Dec Paper Reproduction
 
+![Speculative decoding speed-up model](assets/speedup_model.png)
+
 This repository contains the clean reproduction code for the paper experiments
 on training-free relaxed speculative decoding. It is intentionally narrower
 than the internal working tree: no cluster launch layer, cloud artifact sync,
@@ -51,90 +53,6 @@ python scripts/prepare_data.py --tasks gpqa
 ```
 
 LCB evaluation executes generated Python. Run it in an isolated environment.
-
-## One-Run Smoke
-
-List a clipped debug config:
-
-```bash
-python scripts/run_paper_grid.py list \
-  --preset debug \
-  --tasks aime24 \
-  --model-settings qwen3_0p6b_32b \
-  --methods cactus \
-  --draft-lengths 3 \
-  --max-configs 1
-```
-
-Run it:
-
-```bash
-python scripts/run_paper_grid.py run \
-  --preset debug \
-  --tasks aime24 \
-  --model-settings qwen3_0p6b_32b \
-  --methods cactus \
-  --draft-lengths 3 \
-  --max-configs 1 \
-  --tensor-parallel-size 1 \
-  --runs-root runs/debug
-```
-
-For LCB, add local code evaluation:
-
-```bash
-python scripts/run_paper_grid.py run \
-  --preset debug \
-  --tasks lcb \
-  --model-settings qwen3_0p6b_32b \
-  --methods strict \
-  --draft-lengths 3 \
-  --max-configs 1 \
-  --evaluate-lcb \
-  --runs-root runs/debug-lcb
-```
-
-## Debug Grid
-
-Write all clipped debug configs across paper tasks, model settings, methods,
-draft lengths, and relaxation values:
-
-```bash
-python scripts/run_paper_grid.py write-configs \
-  --preset debug \
-  --output-dir configs/generated/debug
-```
-
-Run the clipped debug grid:
-
-```bash
-python scripts/run_paper_grid.py run \
-  --preset debug \
-  --output-dir configs/generated/debug \
-  --runs-root runs/debug \
-  --evaluate-lcb
-```
-
-Use filters such as `--tasks`, `--model-settings`, `--methods`,
-`--draft-lengths`, `--first-value-only`, and `--max-configs` to run smaller
-slices.
-
-On a memory-constrained local GPU, use model overrides for mechanical smoke
-tests. This does not reproduce paper numbers; it verifies the runner, overlay,
-parsers, scorers, and artifact schema:
-
-```bash
-python scripts/run_paper_grid.py run \
-  --preset debug \
-  --tasks aime24 \
-  --model-settings qwen3_0p6b_32b \
-  --methods cactus \
-  --draft-lengths 3 \
-  --max-configs 1 \
-  --override-verifier-model Qwen/Qwen3-0.6B \
-  --override-draft-model Qwen/Qwen3-0.6B \
-  --runs-root runs/smoke-small
-```
 
 ## Full Paper Rerun
 
