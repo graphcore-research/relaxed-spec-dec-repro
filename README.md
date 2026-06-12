@@ -1,6 +1,8 @@
 # A Practical Investigation of Training-free Relaxed Speculative Decoding
 
-<img src="assets/relaxed_spec_dec_tradeoff.png" alt="Relaxed speculative decoding trade-off" width="100%">
+<p align="center">
+  <img src="assets/relaxed_spec_dec_tradeoff.png" alt="Relaxed speculative decoding trade-off" width="80%">
+</p>
 
 This repository contains code to reproduce the results in our paper.
 
