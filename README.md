@@ -33,6 +33,29 @@ No generated model outputs are distributed. Reproducibility comes from the
 runner, exact configs/grid, dataset preparation, scoring code, aggregation code,
 and compact component profiles used for proxy speed.
 
+## Data
+
+AIME24 is included as a checked-in 30-row fixture at
+`src/ens_spec_dec/tasks/data/aime_2024_full.jsonl`.
+
+GPQA Diamond is prepared from Hugging Face dataset `Idavidrein/gpqa`, subset
+`gpqa_diamond`, using the 198-question train split. Access may require
+accepting the dataset terms on Hugging Face and setting `HF_TOKEN`.
+
+LiveCodeBench is prepared from Hugging Face dataset
+`livecodebench/code_generation_lite`, using the Code Generation Lite v6
+non-cumulative 175-problem test split.
+
+External datasets are materialized under gitignored `data/benchmarks/`:
+
+```bash
+export HF_TOKEN=...
+python scripts/prepare_data.py --tasks gpqa lcb
+python scripts/prepare_data.py --check-only --tasks gpqa lcb
+```
+
+LCB evaluation executes generated Python. Run it in an isolated environment.
+
 ## Setup
 
 Use a fresh environment. The vLLM overlay mutates the installed vLLM Python
@@ -43,15 +66,6 @@ uv sync
 python scripts/apply_vllm_overlay.py
 python scripts/prepare_data.py --tasks gpqa lcb
 ```
-
-AIME24 is shipped as a checked-in 30-row fixture. GPQA may require an HF token:
-
-```bash
-export HF_TOKEN=...
-python scripts/prepare_data.py --tasks gpqa
-```
-
-LCB evaluation executes generated Python. Run it in an isolated environment.
 
 ## Full Paper Rerun
 
