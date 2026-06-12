@@ -60,11 +60,7 @@ def rows_from_runs(runs_root: Path) -> list[dict[str, object]]:
     if not runs_root.exists():
         raise SystemExit(f"runs root does not exist: {runs_root}")
     rows = []
-    for run_dir in sorted(path for path in runs_root.iterdir() if path.is_dir()):
-        summary_path = run_dir / "summary.json"
-        manifest_path = run_dir / "manifest.json"
-        if not summary_path.is_file() or not manifest_path.is_file():
-            continue
+    for run_dir in _completed_run_dirs(runs_root):
         manifest = read_manifest(run_dir)
         summary = read_summary(run_dir)
         method = manifest.config.generation_params.method
@@ -102,6 +98,14 @@ def rows_from_runs(runs_root: Path) -> list[dict[str, object]]:
             }
         )
     return rows
+
+
+def _completed_run_dirs(runs_root: Path) -> list[Path]:
+    return sorted(
+        path.parent
+        for path in runs_root.rglob("summary.json")
+        if (path.parent / "manifest.json").is_file()
+    )
 
 
 if __name__ == "__main__":
