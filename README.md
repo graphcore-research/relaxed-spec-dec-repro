@@ -1,11 +1,8 @@
-# Relaxed Spec-Dec Paper Reproduction
+# A Practical Investigation of Training-free Relaxed Speculative Decoding
 
-![Speculative decoding speed-up model](assets/speedup_model.png)
+<img src="assets/relaxed_spec_dec_tradeoff.png" alt="Relaxed speculative decoding trade-off" width="100%">
 
-This repository contains the clean reproduction code for the paper experiments
-on training-free relaxed speculative decoding. It is intentionally narrower
-than the internal working tree: no cluster launch layer, cloud artifact sync,
-plotting workflow, paper-writing workflow, or non-paper benchmarks.
+This repository contains code to reproduce the results in our paper.
 
 ## Scope
 
